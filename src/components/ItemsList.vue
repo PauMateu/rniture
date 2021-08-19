@@ -36,7 +36,7 @@ align-items: center;
     font-size: 20px;
     margin-left: 15px;
     color: #f83a26;
-        border-bottom: 3px solid #2d2942;
+    border-bottom: 3px solid #2d2942;
 }
 .item-list {
     display: flex;

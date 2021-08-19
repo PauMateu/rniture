@@ -6,7 +6,7 @@
     <div class="links">
         <router-link to="/" class="navbar-link">Home</router-link> 
         <router-link to="/allproducts" class="navbar-link">All products</router-link>
-        <router-link to="/" class="navbar-link">
+        <router-link to="/newProduct" class="navbar-link">
             <div class="new-item">
                 New item    
             </div>    
