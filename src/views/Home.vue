@@ -1,4 +1,5 @@
 <template>
+  <FrontBanner />
   <div class="home">
     <div v-if="error">{{ error }}</div>
     <div v-if="items.length">
@@ -16,11 +17,12 @@ import getItems from '../composables/getItems'
 
 // component imports
 import ItemsList from '../components/ItemsList.vue'
+import FrontBanner from '../components/FrontBanner.vue'
 // import Spinner from '../components/Spinner.vue'
 
 export default {
   name: 'Home',
-  components: { ItemsList },
+  components: { ItemsList, FrontBanner },
   setup() { 
     const { items, error, load } = getItems()
 
