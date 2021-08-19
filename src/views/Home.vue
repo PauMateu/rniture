@@ -1,18 +1,32 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div v-if="error">{{ error }}</div>
+    <div v-if="items.length">
+      <ItemsList :items="items" />
+    </div>
+    <div v-else>
+      <!-- <Spinner /> -->
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { ref } from 'vue'
+import getItems from '../composables/getItems'
+
+// component imports
+import ItemsList from '../components/ItemsList.vue'
+// import Spinner from '../components/Spinner.vue'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
-  }
+  components: { ItemsList },
+  setup() { 
+    const { items, error, load } = getItems()
+
+    load()
+    
+    return { items, error }
+  },
 }
 </script>
