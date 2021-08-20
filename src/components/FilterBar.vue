@@ -1,9 +1,12 @@
 <template>
-<div class="filter-bar">
-    <div v-for="filter in filters" :key="filter.value">
-        <FilterBarIcon :filter="filter"/>
+
+    <div class="filter-bar">
+        <div v-for="filter in filters" :key="filter.value">
+            <router-link :to="`allproducts?type=${filter.value}`" class="navbar-link">
+            <FilterBarIcon :filter="filter" />
+            </router-link>
+        </div>
     </div>
-</div>
 </template>
 
 <script>

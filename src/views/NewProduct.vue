@@ -1,27 +1,39 @@
 <template>
 
   <form @submit.prevent="handleSubmit">
-      <h1 class="new-prduct-title">Add new item</h1>
-<h3>please fill the form below</h3>
+    <h1 class="new-prduct-title">Add new item</h1>
+    <h3>please fill the form below</h3>
+
     <label>Name:</label>
-    <input type="text" v-model="email" required>
+    <input type="text" v-model="name" required>
+
+    <label>Designer:</label>
+    <input type="text" v-model="designer" required>
+
+
+    <label>Price:</label>
+    <input type="number" v-model="price" required>
 
     <label>Description:</label>
-    <textarea name="Text1" cols="40" rows="5"></textarea>
-    <div v-if="passwordError" class="error">{{ passwordError }}</div>
+    <textarea name="Text1" cols="40" rows="5" v-model="description"></textarea>
+    
 
     <label>Type:</label>
-    <select v-model="role">
-      <option value="developer">Web Developer</option>
-      <option value="designer">Web Designer</option>
+    <select v-model="type">
+      <option value="chair">Chairs</option>
+      <option value="sofa">Sofas</option>
+      <option value="table">Tables</option>
+      <option value="lamp">Lamps</option>
     </select>
 
     <label>Tags (press enter to add):</label>
-    <input type="text" v-model="tempSkill" v-on:keydown.enter.prevent='addSkill'/>
-    <div v-for="skill in skills" :key="skill" class="pill">
-      <span @click="deleteSkill(skill)">{{ skill }}</span>
+    <input type="text" v-model="tempTag" v-on:keydown.enter.prevent='addTag'/>
+    <div v-for="tag in tags" :key="tag" class="pill">
+      <span @click="deleteTag(tag)">{{ tag }}</span>
     </div>
 
+    <label>Image:</label>
+    <input type="file" required>
  
 
     <div class="submit">
@@ -31,48 +43,77 @@
 </template>
 
 <script>
+import postItem from '../composables/postItem'
 export default {
   data() {
     return {
-      email: '',
-      password: '',
-      role: 'developer',
-      terms: false,
-      skills: [],
-      tempSkill: '',
-      passwordError: null,
+      name: '',
+      description: '',
+      type: 'chair',
+      tags: [],
+      tempTag: '',
+      designer: '',
+      price: 0,
+      imageError:false,
     }
   },
   methods: {
-    addSkill($event) {
-        
-      if(this.tempSkill) {
-        if (!this.skills.includes(this.tempSkill)) {
-          this.skills.push(this.tempSkill)
+    addTag($event) {
+      if(this.tempTag) {
+        if (!this.tags.includes(this.tempTag)) {
+          this.tags.push(this.tempTag)
         }
-        this.tempSkill = ''
+        this.tempTag = ''
       }
     },
-    deleteSkill(skill) {
-      this.skills = this.skills.filter(item => {
-        return skill !== item
+    deleteSkill(tag) {
+      this.tags = this.tags.filter(item => {
+        return tag !== item
       })
     },
-    handleSubmit() {
-      // validate password
-      this.passwordError = this.password.length > 5 ?
-        '' : 'Password must be at least 6 characters long'
 
-      if (!this.passwordError) {
-        // make request to database to save user
-        console.log('email: ', this.email)
-        console.log('password: ', this.password)
-        console.log('role: ', this.role)
-        console.log('skills: ', this.skills)
-        console.log('terms accepted: ', this.terms)
-      }
+    handleSubmit() {
+    // transform image to base 64
+    console.log("handeling submit")
+    let imageSrc = "";
+    var file = document
+        .querySelector('input[type=file]')
+        .files[0];
+    var reader = new FileReader();
+    let item = {
+                name: this.name,
+                description: this.description,
+                type: this.type,
+                tags: this.tags,
+                designer:this.designer,
+                price:this.price,
+            }
+
+    reader.onload = function(e) {
+        console.log("loading")
+        imageSrc = e.target.result 
+        console.log(e.target)
+        
+         if (!this.imageError && imageSrc != "") {
+            console.log("we are heres")
+            // make request to database to save user
+            item = {...item,
+            image: imageSrc}
+            console.log(item);
+            const {response, error, post} = postItem(item);
+
+        post();  
+        }         
+    };
+    reader.onerror = function(error) {
+        console.log("error")
+        imageError = true;
+    };
+    reader.readAsDataURL(file);
+    
     }
-  }
+  },
+   
 }
 </script>
 

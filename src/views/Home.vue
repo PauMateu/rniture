@@ -24,7 +24,7 @@ export default {
   components: { ItemsList, FrontBanner, Spinner },
   setup() { 
     const { items, error, load } = getItems()
-    load()
+    load({_limit: 3})
     return { items, error }
   },
 }
