@@ -8,9 +8,12 @@
             <h4 class="item-list-browse-label">Browse all products</h4>
           </router-link>
       </div>
-    <div v-for="item in items" :key="item.id">
-      <SingleItem :item="item" />
-    </div>
+      <div class="item-list-cards">
+        <div v-for="item in items" :key="item.id" >
+            <SingleItem :item="item" />
+        </div>
+      </div>
+    
   </div>
 </template>
 
@@ -24,6 +27,15 @@ export default {
 </script>
 
 <style>
+.item-list-cards{
+    display:flex;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    
+}
 .item-list-browse {
     display: flex;
     align-items: center;
@@ -46,5 +58,14 @@ export default {
 .item-list-text{
     width: 35%;
     margin-right: 20px;
+}
+@media (max-width: 1200px){
+    .item-list-text{
+        width: 100%;
+        margin-right: 20px;
+    }
+    .item-list-cards{
+        /* width: 100%; */
+    }
 }
 </style>
