@@ -1,8 +1,10 @@
 <template>
   <div class="footer">
-    <p>By <span class="accent">Pau Mateu</span></p>
-    <p>Barcelona 2021</p>
-    <p> <span class="accent">Floorfy</span> technical interview</p>
+    <div class="footer-text">
+      <p>By <span class="accent">Pau Mateu</span></p>
+      <p>Barcelona 2021</p>
+      <p> <span class="accent">Floorfy</span> technical interview</p>
+    </div>
   </div>
 </template>
 
@@ -16,7 +18,10 @@
     width: 100%;
     height: 100%;
     background-color: #2d2942;
-    padding: 15px;
+    
+}
+.footer-text{
+  padding: 15px;
 }
 p {
   color: white;

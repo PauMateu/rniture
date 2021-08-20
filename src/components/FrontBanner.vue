@@ -1,28 +1,28 @@
 <template>
   <div class="banner">
-      <div class="text">
-            <span class="title">
-                Style & confort at <span class="logo">.rniture</span>
+      <div class="banner-text">
+            <span class="banner-title">
+                Style & confort at <span class="banner-logo">.rniture</span>
             </span><br>
-            <span class="subtitle">
+            <span class="banner-subtitle">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores eos ex doloribus repudiandae quod quia odio consequatur molestias iure eum porro, amet harum. Fuga accusantium corporis numquam quae aperiam exercitationem!
             </span>
-            <div class="dowloads">
+            <div class="banner-dowloads">
                 Download on 
             </div>
-            <div class="stores">
-                <div class="store-link" @click="openLink('google')">
-                    <img src="https://img.icons8.com/ios/50/000000/google-play--v1.png" class="store-icon"/>
+            <div class="banner-stores">
+                <div class="banner-store-link" @click="openLink('google')">
+                    <img src="https://img.icons8.com/ios/50/000000/google-play--v1.png" class="banner-store-icon"/>
                     Google Play
                 </div>
-                <div class="store-link" @click="openLink('apple')">
-                    <img src="https://img.icons8.com/ios/50/000000/apple-app-store--v2.png" class="store-icon"/>
+                <div class="banner-store-link" @click="openLink('apple')">
+                    <img src="https://img.icons8.com/ios/50/000000/apple-app-store--v2.png" class="banner-store-icon"/>
                     App Store
                 </div>
             </div>
             
       </div>
-      <div class="image">
+      <div class="banner-image">
           <img src="../assets/furniture.png" alt="sofa">
       </div>
    
@@ -47,15 +47,15 @@ export default ({
 
 
 <style>
-.stores{
+.banner-stores{
     display: flex;
 }
-.store-icon{
+.banner-store-icon{
     height: 15px;
     width: 15px;
 
 }
-.store-link{ 
+.banner-store-link{ 
     cursor: pointer;
     margin-right: 15px;   
     margin-top: 20px;
@@ -65,7 +65,7 @@ export default ({
     -webkit-box-shadow: 10px 5px 15px 1px rgba(0,0,0,0.18); 
     box-shadow: 10px 5px 15px 1px rgba(0,0,0,0.18);
 }
-.dowloads{
+.banner-dowloads{
     
     font-size: 20px;
     font-weight: bold;
@@ -78,18 +78,18 @@ export default ({
     justify-content: space-between;
     margin-bottom: 30px;
 }
-.text {
+.banner-text {
     width: 60%;
 }
-.title {
+.banner-title {
     font-size: 50px;
     font-weight: bold;
 }
-.logo {
+.banner-logo {
     color: #f83a26;
 }
 @media (max-width: 1100px) { 
-    .text{
+    .banner-text{
         width: 100%;
     }
  }
