@@ -1,6 +1,7 @@
 <template>
 
   <form @submit.prevent="handleSubmit">
+
     <h1 class="new-prduct-title">Add new item</h1>
     <h3>Please fill the form below</h3>
 
@@ -41,6 +42,7 @@
     </div>
   </form>
   <div v-if="loading"><Spinner /></div>
+  <p v-if="postError" class="error">{{postError}}</p>
 </template>
 
 <script>
@@ -64,75 +66,69 @@ export default {
     const {response, error, post} = postItem();
     const loading = ref(false);
     const router = useRouter()
+    const postError = ref("")
 
+    //logic to add a taf when the user presses enter
     const addTag = () =>{
-        console.log("hey")
-        console.log(tempTag.value)
       if(tempTag.value) {
-        console.log("hey2")
-        if (!tags.value.includes(tempTag.value)) {
-          tags.value.push(tempTag.value)
-        }
+        if (!tags.value.includes(tempTag.value)) 
+            tags.value.push(tempTag.value)
         tempTag.value = ''
       }
     }
+    //delete the tag when user clicks on it
     const deleteTag = (tag) => {
       tags.value = tags.value.filter(item => {
         return tag !== item
       })
     }
+    //handle the creation of the item
     const handleSubmit = () => {
         // transform image to base 64
         loading.value=true;
         let imageSrc = "";
         var file = document.querySelector('input[type=file]').files[0];
         var reader = new FileReader();
-
         let item = {
-                    name: name.value,
-                    description: description.value,
-                    type: type.value,
-                    tags: tags.value,
-                    designer: designer.value,
-                    price: price.value,
-                    added: Date.now(),
-                }
-
+                name: name.value,
+                description: description.value,
+                type: type.value,
+                tags: tags.value,
+                designer: designer.value,
+                price: price.value,
+                added: Date.now(),
+            }
         reader.onload = function(e) {
             imageSrc = e.target.result 
             if (!this.imageError && imageSrc != "") {
-                // make request to database to save user
                 item = {
                     ...item,
                     image: imageSrc
                 }
+                // make request to database to save item
                 post(item);  
             }   
         }    
         reader.onerror = function(error) {
-            console.log("error")
             imageError = true;
         };
         reader.readAsDataURL(file);
     } 
+    //watch the response to react to POST response.
     watch(response, () => {
         loading.value=false;
-        console.log("changed response")
-        console.log(response.value);
         if(response.value.status === 201 && response.value.data.id){
-            console.log("created, great!");
+            //change the route to the details page of the item
             router.push({ name: 'Details', params: { id: response.value.data.id} })
         }
         else{
-           console.log(" an error occurred");
+            postError.value = "Sorry, an error occurred while creating the item."
         }
     })
     
-    return { loading, addTag, deleteTag, handleSubmit, name, description, type, tags, tempTag, designer, price, imageError, postResponse}
+    return {postError, loading, addTag, deleteTag, handleSubmit, name, description, type, tags, tempTag, designer, price, imageError, postResponse}
   }
 }
-  
-
 </script>
 
 <style>
@@ -196,5 +192,6 @@ export default {
     margin-top: 10px;
     font-size: 0.8em;
     font-weight: bold;
+    text-align: center;
   }
 </style>

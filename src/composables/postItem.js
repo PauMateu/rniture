@@ -14,7 +14,6 @@ const postItem = () => {
               'Content-Type': 'application/json'
             }
           })
-        console.log(repo)
     }
     catch(err) {
         error.value = err.message
