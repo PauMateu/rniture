@@ -8,7 +8,7 @@ const getItems = () => {
   const load = async (params) => {
     try {
       let data = await 
-        axios.get("http://localhost:3000/items", {
+        axios.get(`${process.env.VUE_APP_SERVER_ENDPOINT}items`, {
                 params: {
                  ...params,
                  _sort:"added",

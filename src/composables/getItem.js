@@ -7,12 +7,7 @@ const getItem= (id) => {
 
   const load = async () => {
     try {
-      // simulate delay
-      await new Promise(resolve => {
-        setTimeout(resolve, 2000)
-      })
-
-      let data = await fetch('http://localhost:3000/items/' + id)
+      let data = await fetch(`${process.env.VUE_APP_SERVER_ENDPOINT}items/${id}`)
       if (!data.ok) {
         throw Error('That item does not exist')
       }

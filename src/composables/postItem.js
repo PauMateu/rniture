@@ -7,7 +7,7 @@ const postItem = () => {
 
   const post = async (item) => {
     try {
-        response.value = await axios.post('http://localhost:3000/items', 
+        response.value = await axios.post(`${process.env.VUE_APP_SERVER_ENDPOINT}items`, 
             item, {
             headers:  { 
               'Accept': 'application/json',

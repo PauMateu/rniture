@@ -25,6 +25,7 @@
 <script>
 import { computed } from 'vue'
 import RoundButton from "./RoundButton.vue"
+
 export default {
   props: ['item'],
   components: {RoundButton},
