@@ -1,26 +1,23 @@
 import { ref } from 'vue'
 import axios from 'axios'
-const postItem = (item) => {
+const postItem = () => {
 
   const response = ref([])
   const error = ref(null)
 
-  const post = async () => {
-
+  const post = async (item) => {
     try {
-        let response = await axios.post('http://localhost:3000/items', 
+        response.value = await axios.post('http://localhost:3000/items', 
             item, {
             headers:  { 
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             }
           })
-        console.log(response)
-    
+        console.log(repo)
     }
     catch(err) {
-        console.log(err)
-      error.value = err.message
+        error.value = err.message
     }
   }
 

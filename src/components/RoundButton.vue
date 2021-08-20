@@ -8,7 +8,6 @@
 export default {
     props: ['name', 'params'],
     setup (props) {
-         console.log(props.params)
     }
 }
 </script>

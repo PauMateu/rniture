@@ -4,6 +4,11 @@
     <div class="details-text">
       <h3 class="details-item-name">{{ item.name }}</h3>
       <h4 class="details-item-designer">{{ item.designer }}</h4>
+      <div v-if="item.tags">
+        <div v-for="tag in item.tags" :key="tag" class="pill">
+          <span>{{ tag }}</span>
+        </div>
+      </div>
       <p class="pre">{{ item.description}}</p>
       <div class="details-item-shop">
         <p class="details-item-price"></p>
@@ -32,13 +37,15 @@ export default {
   setup(props) {
     const { error, item, load } = getItem(props.id)
     load()
-    console.log(item)
     return { error, item }
   },
 }
 </script>
 
 <style scoped>
+h4{
+  margin-bottom: 0;
+}
 .details-item-back {
   color:  #D1D4D7;
   font-weight: 100;
@@ -97,5 +104,17 @@ export default {
   .details-item-price {
     font-size: 30px;
     font-weight: lighter;
+  }
+    .pill {
+    display: inline-block;
+    margin: 20px 10px 0 0;
+    padding: 6px 12px;
+    background: #f83a26;
+    border-radius: 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
   }
 </style>

@@ -20,14 +20,15 @@ export default {
   components: { AllItemsList, FilterBar},
   setup() { 
     const route = useRoute()
-    console.log(route);
     const { items, error, load } = getItems()
     load()
-
       watch(
       () => route.query,
-      () =>{
-        load({type: route.query.type})
+      () => {
+        if(route.query.type != 'all')
+            load({type: route.query.type})
+        else
+            load()
       }
     )
     return { items, error}

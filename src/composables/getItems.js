@@ -12,14 +12,14 @@ const getItems = () => {
                 params: {
                  ...params,
                  _sort:"added",
-                 _order:"asc"
+                 _order:"desc"
                 },
                 headers:  { 
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                   }
             })
-      console.log(data)
+
       if(data.status != 200) {
         throw Error('no available data')
       }

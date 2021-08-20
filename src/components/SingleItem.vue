@@ -80,5 +80,6 @@ export default {
     box-shadow: 10px 5px 15px 1px rgba(0,0,0,0.18);
     max-width: 215px;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
 </style>

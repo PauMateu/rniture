@@ -1,5 +1,9 @@
 <template>
-  <div class="footer"></div>
+  <div class="footer">
+    <p>By Pau Mateu</p>
+    <p>Barcelona 2021</p>
+    <p>FloorFy technical interview</p>
+  </div>
 </template>
 
 <script>
@@ -8,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .footer{
      
     left: 0;
@@ -16,7 +20,12 @@ export default {
     width: 100%;
     margin-top: 30px;
     width: 100%;
-    height: 50px;
+    height: 100%;
     background-color: #2d2942;
+    padding: 15px;
+}
+p {
+  color: white;
+  margin:3px
 }
 </style>

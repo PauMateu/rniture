@@ -16,6 +16,7 @@ export default {
 <style>
 .filterBarIcon-label{
     margin: 0;
+    color: #2d2942;
 }
 .filterBarIcon{
     display: flex;
@@ -39,7 +40,7 @@ export default {
     max-height: 35px;
     max-width: 35px;
 }
-.filterBarIcon:hover{
+.filterBarIcon:hover .filterBarIcon-label{
    color: #f83a26;
 }
 .filterBarIcon:hover .filterBarIcon-outline {

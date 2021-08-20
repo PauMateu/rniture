@@ -40,6 +40,8 @@ align-items: center;
 }
 .item-list {
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 .item-list-title {
     font-size: 35px;

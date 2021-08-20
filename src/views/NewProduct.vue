@@ -2,7 +2,7 @@
 
   <form @submit.prevent="handleSubmit">
     <h1 class="new-prduct-title">Add new item</h1>
-    <h3>please fill the form below</h3>
+    <h3>Please fill the form below</h3>
 
     <label>Name:</label>
     <input type="text" v-model="name" required>
@@ -27,94 +27,112 @@
     </select>
 
     <label>Tags (press enter to add):</label>
-    <input type="text" v-model="tempTag" v-on:keydown.enter.prevent='addTag'/>
+    <input type="text" v-model="tempTag" @keydown.enter.prevent='addTag'/>
     <div v-for="tag in tags" :key="tag" class="pill">
       <span @click="deleteTag(tag)">{{ tag }}</span>
     </div>
+    <br>
 
     <label>Image:</label>
     <input type="file" required>
- 
-
+    
     <div class="submit">
-      <button>Create an Account</button>
+      <button>Create new item</button>
     </div>
   </form>
+  <div v-if="loading"><Spinner /></div>
 </template>
 
 <script>
+import { ref } from '@vue/reactivity';
 import postItem from '../composables/postItem'
+import { watch } from '@vue/runtime-core';
+import Spinner from '../components/Spinner.vue'
+import { useRouter, useRoute } from 'vue-router'
 export default {
-  data() {
-    return {
-      name: '',
-      description: '',
-      type: 'chair',
-      tags: [],
-      tempTag: '',
-      designer: '',
-      price: 0,
-      imageError:false,
-    }
-  },
-  methods: {
-    addTag($event) {
-      if(this.tempTag) {
-        if (!this.tags.includes(this.tempTag)) {
-          this.tags.push(this.tempTag)
+    components: { Spinner },
+    setup() { 
+    const name = ref("");
+    const description = ref ("");
+    const type = ref("chair");
+    const tags = ref([]);
+    const tempTag = ref("");
+    const designer = ref("")
+    const price = ref(0);
+    const imageError = ref(false);
+    const postResponse = ref("");
+    const {response, error, post} = postItem();
+    const loading = ref(false);
+    const router = useRouter()
+
+    const addTag = () =>{
+        console.log("hey")
+        console.log(tempTag.value)
+      if(tempTag.value) {
+        console.log("hey2")
+        if (!tags.value.includes(tempTag.value)) {
+          tags.value.push(tempTag.value)
         }
-        this.tempTag = ''
+        tempTag.value = ''
       }
-    },
-    deleteSkill(tag) {
-      this.tags = this.tags.filter(item => {
+    }
+    const deleteTag = (tag) => {
+      tags.value = tags.value.filter(item => {
         return tag !== item
       })
-    },
-
-    handleSubmit() {
-    // transform image to base 64
-    console.log("handeling submit")
-    let imageSrc = "";
-    var file = document
-        .querySelector('input[type=file]')
-        .files[0];
-    var reader = new FileReader();
-    let item = {
-                name: this.name,
-                description: this.description,
-                type: this.type,
-                tags: this.tags,
-                designer:this.designer,
-                price:this.price,
-            }
-
-    reader.onload = function(e) {
-        console.log("loading")
-        imageSrc = e.target.result 
-        console.log(e.target)
-        
-         if (!this.imageError && imageSrc != "") {
-            console.log("we are heres")
-            // make request to database to save user
-            item = {...item,
-            image: imageSrc}
-            console.log(item);
-            const {response, error, post} = postItem(item);
-
-        post();  
-        }         
-    };
-    reader.onerror = function(error) {
-        console.log("error")
-        imageError = true;
-    };
-    reader.readAsDataURL(file);
-    
     }
-  },
-   
+    const handleSubmit = () => {
+        // transform image to base 64
+        loading.value=true;
+        let imageSrc = "";
+        var file = document.querySelector('input[type=file]').files[0];
+        var reader = new FileReader();
+
+        let item = {
+                    name: name.value,
+                    description: description.value,
+                    type: type.value,
+                    tags: tags.value,
+                    designer: designer.value,
+                    price: price.value,
+                    added: Date.now(),
+                }
+
+        reader.onload = function(e) {
+            imageSrc = e.target.result 
+            if (!this.imageError && imageSrc != "") {
+                // make request to database to save user
+                item = {
+                    ...item,
+                    image: imageSrc
+                }
+                post(item);  
+            }   
+        }    
+        reader.onerror = function(error) {
+            console.log("error")
+            imageError = true;
+        };
+        reader.readAsDataURL(file);
+    } 
+    watch(response, () => {
+        loading.value=false;
+        console.log("changed response")
+        console.log(response.value);
+        if(response.value.status === 201 && response.value.data.id){
+            console.log("created, great!");
+            router.push({ name: 'Details', params: { id: response.value.data.id} })
+        }
+        else{
+           console.log(" an error occurred");
+        }
+    })
+    
+    return { loading, addTag, deleteTag, handleSubmit, name, description, type, tags, tempTag, designer, price, imageError, postResponse}
+  }
 }
+  
+
 </script>
 
 <style>
@@ -160,7 +178,7 @@ export default {
   }
   button {
       font-size: 20px;
-
+    cursor:pointer;
     background: #2d2942;
     border: 0;
     padding: 10px 20px;
@@ -168,9 +186,11 @@ export default {
     color: white;
     border-radius: 20px;
   }
+  
   .submit {
     text-align: center;
   }
+
   .error {
     color: #ff0062;
     margin-top: 10px;
