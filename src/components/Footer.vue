@@ -1,20 +1,14 @@
 <template>
   <div class="footer">
-    <p>By Pau Mateu</p>
+    <p>By <span class="accent">Pau Mateu</span></p>
     <p>Barcelona 2021</p>
-    <p>FloorFy technical interview</p>
+    <p> <span class="accent">Floorfy</span> technical interview</p>
   </div>
 </template>
 
-<script>
-export default {
-
-}
-</script>
 
 <style scoped>
-.footer{
-     
+.footer{   
     left: 0;
     bottom: 0;
     width: 100%;
@@ -27,5 +21,9 @@ export default {
 p {
   color: white;
   margin:3px
+}
+.accent {
+  color: #f83a26;
+  font-weight: bold;
 }
 </style>

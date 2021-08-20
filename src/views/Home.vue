@@ -13,8 +13,6 @@
 
 <script>
 import getItems from '../composables/getItems'
-
-// component imports
 import ItemsList from '../components/ItemsList.vue'
 import FrontBanner from '../components/FrontBanner.vue'
 import Spinner from '../components/Spinner.vue'

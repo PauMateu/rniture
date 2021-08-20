@@ -15,22 +15,18 @@
 </template>
 
 <script>
-import { onMounted, onUnmounted, onUpdated } from 'vue'
-// component imports
 import SingleItem from './SingleItem.vue'
 import RoundButton from './RoundButton.vue'
 export default {
   props: ['items'],
   components: { SingleItem, RoundButton},
-  setup() {
-  }
 }
 </script>
 
 <style>
 .item-list-browse {
-display: flex;
-align-items: center;
+    display: flex;
+    align-items: center;
 }
 .item-list-browse-label{
     font-size: 20px;

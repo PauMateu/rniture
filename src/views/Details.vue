@@ -27,10 +27,7 @@
 
 <script>
 import getItem from '@/composables/getItem'
-
-// component imports
 import Spinner from '../components/Spinner.vue'
-
 export default {
   props: ['id'],
   components: { Spinner },
@@ -81,40 +78,40 @@ h4{
   margin: 20px;
   padding: 20px;
 }
-  .details{
-    display: flex;
-    align-items:flex-start;
-    justify-content: space-around;
-    margin-top: 60px;
-  }
-  .details-item-name {
-    font-size: 55px;
-    font-weight: bold;
-    margin-bottom: 0;
-  }
-  .details-item-designer {
-    font-size: 30px;
-    font-weight: 100;
-    color: #f83a26;
-    margin-top: 0;
-  }
-  .details-item-color {
-        color: #f83a26;
-  }
-  .details-item-price {
-    font-size: 30px;
-    font-weight: lighter;
-  }
-    .pill {
-    display: inline-block;
-    margin: 20px 10px 0 0;
-    padding: 6px 12px;
-    background: #f83a26;
-    border-radius: 20px;
-    font-size: 14px;
-    letter-spacing: 1px;
-    font-weight: bold;
-    color: white;
-    cursor: pointer;
-  }
+.details{
+  display: flex;
+  align-items:flex-start;
+  justify-content: space-around;
+  margin-top: 60px;
+}
+.details-item-name {
+  font-size: 55px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+.details-item-designer {
+  font-size: 30px;
+  font-weight: 100;
+  color: #f83a26;
+  margin-top: 0;
+}
+.details-item-color {
+      color: #f83a26;
+}
+.details-item-price {
+  font-size: 30px;
+  font-weight: lighter;
+}
+.pill {
+  display: inline-block;
+  margin: 20px 10px 0 0;
+  padding: 6px 12px;
+  background: #f83a26;
+  border-radius: 20px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
 </style>

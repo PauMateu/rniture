@@ -1,15 +1,13 @@
 <template>
     <div id="nav">
-    <div class="logo-navbar">
+    <router-link to="/"  class="logo-navbar">
         .rniture
-    </div>
+    </router-link>
     <div class="links">
         <router-link to="/" class="navbar-link">Home</router-link> 
         <router-link to="/allproducts" class="navbar-link">All products</router-link>
-        <router-link to="/newProduct" class="navbar-link">
-            <div class="new-item">
-                New item    
-            </div>    
+        <router-link to="/newProduct" class="navbar-link new-item white">
+            New item    
         </router-link> 
     </div>
 
@@ -17,15 +15,11 @@
   
 </template>
 
-<script>
-export default {
-    setup() {
-        
-    }
-}
-</script>
 
 <style>
+.white {
+    color: white !important;
+}
 .links{
     display: flex;
     align-items: center;
@@ -58,6 +52,6 @@ export default {
 }
 
 #nav a.router-link-exact-active {
-  color: #f83a26;
+  color: #f83a26 !important;
 }
 </style>

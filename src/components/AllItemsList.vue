@@ -12,25 +12,20 @@
 </template>
 
 <script>
-import { onMounted, onUnmounted, onUpdated } from 'vue'
-// component imports
+
 import SingleItem from './SingleItem.vue'
 import RoundButton from './RoundButton.vue'
 
 export default {
   props: ['items'],
   components: { SingleItem, RoundButton},
-  setup() {
-  }
 }
 </script>
 
 <style>
-
 .item-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-
 </style>
