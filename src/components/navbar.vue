@@ -35,10 +35,10 @@
     text-decoration: none;
 }
 .logo-navbar {
-    color: #f83a26;
+    color: #f83a26 !important;
     font-size: 28px;
     font-weight: bold;
-    border-bottom: 3px solid #f83a26;
+    border-bottom: 3px solid #f83a26 !important;
 }
 #nav {
     display: flex;

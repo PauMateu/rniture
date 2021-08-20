@@ -47,6 +47,10 @@ export default ({
 
 
 <style>
+.banner-image{
+    display: flex;
+    justify-content: center;
+}
 .banner-stores{
     display: flex;
 }
@@ -90,6 +94,9 @@ export default ({
 }
 @media (max-width: 1100px) { 
     .banner-text{
+        width: 100%;
+    }
+    .banner-image{
         width: 100%;
     }
  }
